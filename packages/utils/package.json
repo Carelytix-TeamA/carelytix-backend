@@ -1,0 +1,40 @@
+{
+  "name": "@carelytix/utils",
+  "version": "0.0.1",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./build/index.js",
+      "type": "./build/index.d.ts"
+    },
+    "./error-handler": {
+      "import": "./build/error-handler/index.js",
+      "type": "./build/error-handler/index.d.ts"
+    },
+    "./zod": {
+      "import": "./build/lib/zod/index.js",
+      "type": "./build/lib/zod/index.d.ts"
+    },
+    "./responce": {
+      "import": "./build/lib/responce/index.js",
+      "type": "./build/lib/responce/index.d.ts"
+    },
+    "./validation": {
+      "import": "./build/lib/validation/index.js",
+      "type": "./build/lib/validation/index.d.ts"
+    }
+  },
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "tsc && tsc-alias"
+  },
+  "devDependencies": {
+    "@types/node": "^24.3.0",
+    "tsc-alias": "^1.8.16",
+    "tsx": "^4.20.4",
+    "typescript": "^5.9.2",
+    "zod": "^4.0.17",
+    "express": "^4.21.2",
+    "@types/express": "^4.17.21"
+  }
+}

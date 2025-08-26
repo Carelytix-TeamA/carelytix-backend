@@ -1,0 +1,29 @@
+{
+  "name": "@carelytix/db",
+  "version": "0.0.1",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./build/index.js",
+      "type": "./build/index.d.ts"
+    }
+  },
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "tsc && tsc-alias",
+    "db:generate": "prisma generate",
+    "db:migrate": "prisma migrate dev",
+    "db:studio": "prisma studio",
+    "db:push": "prisma db push"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.18.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.3.0",
+    "tsc-alias": "^1.8.16",
+    "tsx": "^4.20.4",
+    "prisma": "^5.22.0",
+    "typescript": "^5.9.2"
+  }
+}

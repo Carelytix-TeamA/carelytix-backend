@@ -1,0 +1,29 @@
+{
+  "name": "@carelytix/api-gateway",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc && tsc-alias",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "express-http-proxy": "^2.1.1",
+    "express-rate-limit": "^8.0.1",
+    "morgan": "^1.10.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.17",
+    "dotenv": "^17.2.1",
+    "tsc-alias": "^1.8.16",
+    "tsx": "^4.7.1",
+    "typescript": "^5.8.3",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^4.17.21",
+    "@types/morgan": "^1.9.10",
+    "@types/cookie-parser": "^1.4.9",
+    "@types/express-http-proxy": "^1.6.7"
+  }
+}

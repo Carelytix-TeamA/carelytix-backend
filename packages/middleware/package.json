@@ -1,0 +1,32 @@
+{
+  "name": "@carelytix/middleware",
+  "version": "0.0.1",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./build/index.js",
+      "type": "./build/index.d.ts"
+    },
+    "./auth": {
+      "import": "./build/auth/index.js",
+      "type": "./build/auth/index.d.ts"
+    }
+  },
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "tsc && tsc-alias"
+  },
+  "dependencies": {
+    "@carelytix/db": "workspace:*",
+    "jsonwebtoken": "^9.0.2"
+  },
+  "devDependencies": {
+    "@types/node": "^24.3.0",
+    "tsc-alias": "^1.8.16",
+    "tsx": "^4.20.4",
+    "typescript": "^5.9.2",
+    "express": "^4.21.2",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/express": "^4.17.21"
+  }
+}
