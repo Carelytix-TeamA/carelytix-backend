@@ -30,11 +30,11 @@ const limiter = rateLimit({
 
 app.use(limiter);
 
-app.get("/gateway-health", (req, res) => {
+app.get("/api/v1/gateway-health", (req, res) => {
   res.send({ message: "Welcome to api-gateway!" });
 });
 
-app.use("/api", proxy("http://localhost:6001"));
+app.use("/api/v1/auth", proxy("http://localhost:6001"));
 
 const port = process.env.PORT || 8080;
 const server = app.listen(port, () => {

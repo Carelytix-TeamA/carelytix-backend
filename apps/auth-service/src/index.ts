@@ -16,11 +16,11 @@ app.use(
 );
 app.use(express.json());
 app.use(cookieParser());
-app.get("/", (req, res) => {
-  res.send({ message: "Hello Auth Service API" });
-});
 // Routes
-app.use("/api", router);
+app.get("/auth-health", (req, res) => {
+  res.send({ message: "Welcome to auth-service!" });
+});
+app.use("/", router);
 
 app.use(errorMiddleware);
 const port = process.env.PORT ? Number(process.env.PORT) : 6001;

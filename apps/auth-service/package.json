@@ -1,5 +1,5 @@
 {
-  "name": "@carelytix/api-gateway",
+  "name": "@carelytix/auth-service",
   "type": "module",
   "scripts": {
     "dev": "tsx watch src/index.ts",
