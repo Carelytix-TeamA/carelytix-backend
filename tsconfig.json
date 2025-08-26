@@ -9,6 +9,8 @@
   "references": [
     // Reference to the utils package (e.g., shared utility functions/types).
     // This allows other packages/apps to depend on and use types from utils.
+
+    { "path": "./apps/auth-service" }, // Web client
     { "path": "./apps/api-gateway" }, // Web client
     { "path": "./packages/db" }, // Shared configs of db
     { "path": "./packages/middleware" }, // Shared configs of middleware
