@@ -4,11 +4,10 @@
   "scripts": {
     "dev": "pnpm run -r --parallel --aggregate-output dev",
     "build": "pnpm run -r build",
-    "db:generate": "pnpm --filter db prisma generate",
-    "db:migrate": "pnpm --filter db prisma migrate dev --name init",
-    "db:studio": "pnpm --filter db prisma studio",
-    "db:deploy": "pnpm --filter db prisma migrate deploy",
-    "db:reset": "pnpm --filter db prisma migrate reset --force"
+    "db:generate": "pnpm --filter @carelytix/db db:generate",
+    "db:migrate": "pnpm --filter @carelytix/db db:migrate",
+    "db:studio": "pnpm --filter @carelytix/db db:studio",
+    "db:push": "pnpm --filter @carelytix/db db:push"
   },
   "devDependencies": {
     "prettier": "^2.6.2"
