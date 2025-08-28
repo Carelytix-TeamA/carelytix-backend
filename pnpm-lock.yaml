@@ -12,6 +12,58 @@ importers:
         specifier: ^2.6.2
         version: 2.8.8
 
+  apps/admin-service:
+    dependencies:
+      '@carelytix/db':
+        specifier: workspace:*
+        version: link:../../packages/db
+      '@carelytix/utils':
+        specifier: workspace:*
+        version: link:../../packages/utils
+      bcryptjs:
+        specifier: ^3.0.2
+        version: 3.0.2
+      cookie-parser:
+        specifier: ^1.4.7
+        version: 1.4.7
+      cors:
+        specifier: ^2.8.5
+        version: 2.8.5
+      express:
+        specifier: ^4.21.2
+        version: 4.21.2
+      zod:
+        specifier: ^4.1.4
+        version: 4.1.4
+    devDependencies:
+      '@types/cookie-parser':
+        specifier: ^1.4.9
+        version: 1.4.9(@types/express@4.17.23)
+      '@types/cors':
+        specifier: ^2.8.19
+        version: 2.8.19
+      '@types/express':
+        specifier: ^4.17.21
+        version: 4.17.23
+      '@types/jsonwebtoken':
+        specifier: ^9.0.10
+        version: 9.0.10
+      '@types/node':
+        specifier: ^20.11.17
+        version: 20.19.11
+      dotenv:
+        specifier: ^17.2.1
+        version: 17.2.1
+      tsc-alias:
+        specifier: ^1.8.16
+        version: 1.8.16
+      tsx:
+        specifier: ^4.7.1
+        version: 4.20.5
+      typescript:
+        specifier: ^5.8.3
+        version: 5.9.2
+
   apps/api-gateway:
     dependencies:
       cookie-parser:
@@ -89,7 +141,7 @@ importers:
         version: 9.0.2
       zod:
         specifier: ^4.0.14
-        version: 4.1.1
+        version: 4.1.4
     devDependencies:
       '@types/cookie-parser':
         specifier: ^1.4.9
@@ -194,7 +246,7 @@ importers:
         version: 5.9.2
       zod:
         specifier: ^4.0.17
-        version: 4.1.1
+        version: 4.1.4
 
 packages:
 
@@ -992,8 +1044,8 @@ packages:
     resolution: {integrity: sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==}
     engines: {node: '>= 0.8'}
 
-  zod@4.1.1:
-    resolution: {integrity: sha512-SgMZK/h8Tigt9nnKkfJMvB/mKjiJXaX26xegP4sa+0wHIFVFWVlsQGdhklDmuargBD3Hsi3rsQRIzwJIhTPJHA==}
+  zod@4.1.4:
+    resolution: {integrity: sha512-2YqJuWkU6IIK9qcE4k1lLLhyZ6zFw7XVRdQGpV97jEIZwTrscUw+DY31Xczd8nwaoksyJUIxCojZXwckJovWxA==}
 
 snapshots:
 
@@ -1127,7 +1179,7 @@ snapshots:
 
   '@types/cors@2.8.19':
     dependencies:
-      '@types/node': 20.19.11
+      '@types/node': 24.3.0
 
   '@types/express-http-proxy@1.6.7':
     dependencies:
@@ -1158,7 +1210,7 @@ snapshots:
 
   '@types/morgan@1.9.10':
     dependencies:
-      '@types/node': 20.19.11
+      '@types/node': 24.3.0
 
   '@types/ms@2.1.0': {}
 
@@ -1774,4 +1826,4 @@ snapshots:
 
   vary@1.1.2: {}
 
-  zod@4.1.1: {}
+  zod@4.1.4: {}
