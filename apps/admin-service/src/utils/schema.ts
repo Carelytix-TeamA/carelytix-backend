@@ -25,3 +25,17 @@ export const updateMemberSchema = z.object({
     .max(100, { message: "Password must be at most 100 characters long" })
     .optional(),
 });
+
+export const createFeatureSchema = z.object({
+  name: z
+    .string()
+    .min(2, { message: "Name must be at least 2 characters long" })
+    .max(50, { message: "Name must be at most 50 characters long" }),
+});
+
+export const updateFeatureSchema = z.object({
+  name: z
+    .string()
+    .min(2, { message: "Name must be at least 2 characters long" })
+    .max(50, { message: "Name must be at most 50 characters long" }),
+});

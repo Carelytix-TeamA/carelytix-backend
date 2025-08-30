@@ -3,7 +3,8 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import { errorMiddleware } from "@carelytix/utils/error-handler";
 import dotenv from "dotenv";
-import router from "./routes/member.router";
+import memberRouter from "./routes/member.router";
+import featureRouter from "./routes/feature.router";
 dotenv.config();
 const app = express();
 
@@ -21,7 +22,8 @@ app.get("/admin-health", (req, res) => {
   res.send({ message: "Welcome to admin-service!" });
 });
 
-app.use("/", router);
+app.use("/member", memberRouter);
+app.use("/feature", featureRouter);
 
 app.use(errorMiddleware);
 const port = process.env.PORT ? Number(process.env.PORT) : 6003;
