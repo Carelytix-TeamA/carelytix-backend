@@ -39,3 +39,25 @@ export const updateFeatureSchema = z.object({
     .min(2, { message: "Name must be at least 2 characters long" })
     .max(50, { message: "Name must be at most 50 characters long" }),
 });
+
+export const createModuleSchema = z.object({
+  name: z
+    .string()
+    .min(2, { message: "Name must be at least 2 characters long" })
+    .max(50, { message: "Name must be at most 50 characters long" }),
+});
+
+export const updateModuleSchema = z.object({
+  name: z
+    .string()
+    .min(2, { message: "Name must be at least 2 characters long" })
+    .max(50, { message: "Name must be at most 50 characters long" }),
+});
+
+export const addFeatureToModuleSchema = z.object({
+  feature_ids: z.array(z.string()),
+});
+
+export const removeFeatureFromModuleSchema = z.object({
+  feature_ids: z.array(z.string()),
+});
