@@ -6,6 +6,7 @@ import dotenv from "dotenv";
 import memberRouter from "./routes/member.router";
 import featureRouter from "./routes/feature.router";
 import moduleRouter from "./routes/module.router";
+import planRouter from "./routes/plan.router";
 dotenv.config();
 const app = express();
 
@@ -26,6 +27,7 @@ app.get("/admin-health", (req, res) => {
 app.use("/member", memberRouter);
 app.use("/feature", featureRouter);
 app.use("/module", moduleRouter);
+app.use("/plan", planRouter);
 
 app.use(errorMiddleware);
 const port = process.env.PORT ? Number(process.env.PORT) : 6003;

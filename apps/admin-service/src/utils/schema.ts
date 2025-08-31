@@ -61,3 +61,25 @@ export const addFeatureToModuleSchema = z.object({
 export const removeFeatureFromModuleSchema = z.object({
   feature_ids: z.array(z.string()),
 });
+
+export const createPlanSchema = z.object({
+  name: z
+    .string()
+    .min(2, { message: "Name must be at least 2 characters long" }),
+  module_ids: z.array(z.string()),
+});
+
+export const updatePlanSchema = z.object({
+  name: z
+    .string()
+    .min(2, { message: "Name must be at least 2 characters long" }),
+  planMeta: z.record(z.any(), z.any()).optional(),
+});
+
+export const addModuleToPlanSchema = z.object({
+  module_ids: z.array(z.string()),
+});
+
+export const removeModuleFromPlanSchema = z.object({
+  module_ids: z.array(z.string()),
+});
