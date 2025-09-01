@@ -83,3 +83,13 @@ export const addModuleToPlanSchema = z.object({
 export const removeModuleFromPlanSchema = z.object({
   module_ids: z.array(z.string()),
 });
+
+export const createCouponSchema = z.object({
+  coupon_code: z
+    .string()
+    .min(2, { message: "Coupon code must be at least 2 characters long" })
+    .max(50, { message: "Coupon code must be at most 50 characters long" }),
+  discount_type: z.enum(["percentage", "fixed", "flat"]),
+  amount: z.number().min(1, { message: "Amount must be at least 1" }),
+  coupon_type: z.enum(["one_time", "recurring", "all"]),
+});

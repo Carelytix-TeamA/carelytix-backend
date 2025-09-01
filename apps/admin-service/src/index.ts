@@ -7,6 +7,7 @@ import memberRouter from "./routes/member.router";
 import featureRouter from "./routes/feature.router";
 import moduleRouter from "./routes/module.router";
 import planRouter from "./routes/plan.router";
+import couponRouter from "./routes/coupon.router";
 dotenv.config();
 const app = express();
 
@@ -28,6 +29,7 @@ app.use("/member", memberRouter);
 app.use("/feature", featureRouter);
 app.use("/module", moduleRouter);
 app.use("/plan", planRouter);
+app.use("/coupon", couponRouter);
 
 app.use(errorMiddleware);
 const port = process.env.PORT ? Number(process.env.PORT) : 6003;
