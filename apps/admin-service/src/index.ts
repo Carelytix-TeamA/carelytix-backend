@@ -3,11 +3,11 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import { errorMiddleware } from "@carelytix/utils/error-handler";
 import dotenv from "dotenv";
-import memberRouter from "./routes/member.router";
-import featureRouter from "./routes/feature.router";
-import moduleRouter from "./routes/module.router";
-import planRouter from "./routes/plan.router";
-import couponRouter from "./routes/coupon.router";
+import memberRouter from "./routes/member.router.js";
+import featureRouter from "./routes/feature.router.js";
+import moduleRouter from "./routes/module.router.js";
+import planRouter from "./routes/plan.router.js";
+import couponRouter from "./routes/coupon.router.js";
 dotenv.config();
 const app = express();
 

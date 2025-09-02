@@ -5,7 +5,7 @@ import {
   getAllMembers,
   getMemberById,
   updateMember,
-} from "../controller/member.controller";
+} from "../controller/member.controller.js";
 
 const router: Router = express.Router();
 

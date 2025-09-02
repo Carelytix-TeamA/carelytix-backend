@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { validateData } from "@carelytix/utils/validation";
-import { createSalonSchema, updateSalonSchema } from "../utils/schema";
+import { createSalonSchema, updateSalonSchema } from "../utils/schema.js";
 import { ZodError } from "zod";
 import { ValidationError, NotFoundError } from "@carelytix/utils/error-handler";
 import { prisma } from "@carelytix/db";

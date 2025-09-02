@@ -5,7 +5,7 @@ import {
   createPlanSchema,
   removeModuleFromPlanSchema,
   updatePlanSchema,
-} from "../utils/schema";
+} from "../utils/schema.js";
 import { AuthError } from "@carelytix/utils/error-handler";
 import { ZodError } from "zod";
 import { prisma } from "@carelytix/db";

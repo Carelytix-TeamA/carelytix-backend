@@ -5,7 +5,7 @@ import {
   createModuleSchema,
   removeFeatureFromModuleSchema,
   updateModuleSchema,
-} from "../utils/schema";
+} from "../utils/schema.js";
 import { ZodError } from "zod";
 import { AuthError, NotFoundError } from "@carelytix/utils/error-handler";
 import { prisma } from "@carelytix/db";

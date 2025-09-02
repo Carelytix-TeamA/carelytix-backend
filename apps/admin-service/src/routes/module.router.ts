@@ -6,7 +6,7 @@ import {
   getModuleById,
   removeFeatureFromModule,
   updateModule,
-} from "../controller/module.controller";
+} from "../controller/module.controller.js";
 
 const router: Router = express.Router();
 

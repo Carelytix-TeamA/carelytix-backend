@@ -2,8 +2,8 @@ import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
-import salonRouter from "./routes/salon.router";
-import branchRouter from "./routes/branch.router";
+import salonRouter from "./routes/salon.router.js";
+import branchRouter from "./routes/branch.router.js";
 
 dotenv.config();
 const app = express();

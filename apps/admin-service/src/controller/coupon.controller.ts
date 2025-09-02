@@ -4,7 +4,7 @@ import { ZodError } from "zod";
 import { AuthError, ValidationError } from "@carelytix/utils/error-handler";
 import { prisma } from "@carelytix/db";
 import { ApiResponse } from "@carelytix/utils/responce";
-import { createCouponSchema } from "../utils/schema";
+import { createCouponSchema } from "../utils/schema.js";
 
 export const createCoupon = async (
   req: Request,
