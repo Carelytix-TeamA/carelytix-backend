@@ -9,6 +9,7 @@
   "dependencies": {
     "@carelytix/db": "workspace:*",
     "@carelytix/utils": "workspace:*",
+    "@carelytix/middleware": "workspace:*",
     "bcryptjs": "^3.0.2",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
