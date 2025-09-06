@@ -17,6 +17,7 @@ export const createSalon = async (
 ) => {
   try {
     const ownerId = req.user?.id;
+    console.log("ownerId", ownerId);
     if (!ownerId) {
       throw new ValidationError("User not authenticated");
     }

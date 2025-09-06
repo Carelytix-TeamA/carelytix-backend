@@ -27,6 +27,7 @@ export const isAuthenticated = async (
     req.user = account;
     return next();
   } catch (error) {
+    console.log("isAuthenticated.error", error);
     return res
       .status(401)
       .json({ message: "Unauthorized! Token expired or Invalid token." });

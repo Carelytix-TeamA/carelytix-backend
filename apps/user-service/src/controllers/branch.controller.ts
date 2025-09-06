@@ -77,11 +77,10 @@ export const getSingleBranch = async (
   next: NextFunction
 ) => {
   try {
-    const saloonId = req.params.id;
-    const branchId = req.params.branch_id;
+    const branchId = req.params.id;
 
     const branch = await prisma.branch.findFirst({
-      where: { id: branchId, saloonId: saloonId },
+      where: { id: branchId },
     });
 
     if (!branch) {
@@ -108,7 +107,7 @@ export const updateBranch = async (
       throw new ValidationError(result.error.message || "Invalid request data");
     }
 
-    const { name, address, city, pincode, contactNo, saloonId } = result.data;
+    const { name, address, city, pincode, contactNo } = result.data;
 
     const existingBranch = await prisma.branch.findFirst({
       where: { id: branchId },
@@ -126,7 +125,6 @@ export const updateBranch = async (
         city,
         pincode,
         contactNo,
-        saloonId,
       },
     });
 

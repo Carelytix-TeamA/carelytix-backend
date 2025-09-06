@@ -46,7 +46,18 @@ app.use(
     },
   })
 );
-app.use("/api/v1/user", proxy("http://localhost:6002"));
+app.use(
+  "/api/v1/user",
+  proxy("http://localhost:6002", {
+    proxyReqOptDecorator: (proxyReqOpts, srcReq) => {
+      // Forward cookies & headers
+      proxyReqOpts.headers = {
+        ...srcReq.headers,
+      };
+      return proxyReqOpts;
+    },
+  })
+);
 app.use("/api/v1/admin", proxy("http://localhost:6003"));
 
 const port = process.env.PORT || 8080;

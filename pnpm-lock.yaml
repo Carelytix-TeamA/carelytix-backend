@@ -182,6 +182,9 @@ importers:
       '@carelytix/db':
         specifier: workspace:*
         version: link:../../packages/db
+      '@carelytix/middleware':
+        specifier: workspace:*
+        version: link:../../packages/middleware
       '@carelytix/utils':
         specifier: workspace:*
         version: link:../../packages/utils
