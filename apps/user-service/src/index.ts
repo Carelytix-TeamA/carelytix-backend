@@ -4,6 +4,7 @@ import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import salonRouter from "./routes/salon.router.js";
 import branchRouter from "./routes/branch.router.js";
+import staffRouter from "./routes/staff.router.js";
 
 dotenv.config();
 const app = express();
@@ -24,6 +25,7 @@ app.get("/user-health", (req, res) => {
 
 app.use("/salon", salonRouter);
 app.use("/branch", branchRouter);
+app.use("/staff", staffRouter);
 
 const port = process.env.PORT ? Number(process.env.PORT) : 6002;
 const server = app.listen(port, () => {
