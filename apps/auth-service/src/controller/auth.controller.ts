@@ -18,7 +18,7 @@ export const userRegistration = async (
     if (result instanceof ZodError) {
       throw new ValidationError(result.message || "Invalid request data");
     }
-    const { name, email, password } = result;
+    const { name, email, password, primaryContactNo, userMeta } = result;
     const existingUser = await prisma.user.findUnique({
       where: { email },
     });
@@ -30,6 +30,8 @@ export const userRegistration = async (
       data: {
         name,
         email,
+        primaryContactNo,
+        userMeta,
         password: hashedPassword,
       },
     });
@@ -126,4 +128,14 @@ export const logoutUser = async (
   setCookie(res, "access-token", "");
   setCookie(res, "refresh-token", "");
   return res.status(200).json(new ApiResponse(200, null, "Logout successful!"));
+};
+
+export const getUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  return res
+    .status(200)
+    .json(new ApiResponse(200, req.user, "User fetched successfully!"));
 };

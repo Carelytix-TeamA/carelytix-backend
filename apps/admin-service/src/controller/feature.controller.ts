@@ -12,6 +12,7 @@ export const createFeature = async (
   next: NextFunction
 ) => {
   try {
+    console.log("result", req.body);
     const result = validateData(createFeatureSchema, req.body);
     if (result instanceof ZodError) {
       throw new AuthError(result.message || "Invalid request data");

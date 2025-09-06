@@ -34,7 +34,18 @@ app.get("/api/v1/gateway-health", (req, res) => {
   res.send({ message: "Welcome to api-gateway!" });
 });
 
-app.use("/api/v1/auth", proxy("http://localhost:6001"));
+app.use(
+  "/api/v1/auth",
+  proxy("http://localhost:6001", {
+    proxyReqOptDecorator: (proxyReqOpts, srcReq) => {
+      // Forward cookies & headers
+      proxyReqOpts.headers = {
+        ...srcReq.headers,
+      };
+      return proxyReqOpts;
+    },
+  })
+);
 app.use("/api/v1/user", proxy("http://localhost:6002"));
 app.use("/api/v1/admin", proxy("http://localhost:6003"));
 

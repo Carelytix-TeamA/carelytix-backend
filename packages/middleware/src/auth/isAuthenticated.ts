@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import { prisma } from "@carelytix/db";
 
-const isAuthenticated = async (
+export const isAuthenticated = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -32,5 +32,3 @@ const isAuthenticated = async (
       .json({ message: "Unauthorized! Token expired or Invalid token." });
   }
 };
-
-export default isAuthenticated;
