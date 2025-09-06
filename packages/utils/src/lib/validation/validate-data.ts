@@ -1,4 +1,4 @@
-import {ZodError, ZodType} from "zod";
+import { ZodError, ZodType } from "zod";
 
 export const validateData = <T>(
   schema: ZodType<T>,

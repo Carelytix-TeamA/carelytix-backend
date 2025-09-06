@@ -1,31 +1,32 @@
 import { NextFunction, Request, Response } from "express";
-import { validateData } from "@carelytix/utils/validation";
-import { createSalonSchema, updateSalonSchema } from "../utils/schema.js";
-import { ZodError } from "zod";
-import { ValidationError, NotFoundError } from "@carelytix/utils/error-handler";
+import { NotFoundError, ValidationError } from "@carelytix/utils/error-handler";
 import { prisma } from "@carelytix/db";
 import { ApiResponse } from "@carelytix/utils/responce";
+import z from "zod";
 
-interface AuthRequest extends Request {
-  user?: {
-    id: string;
-  };
-}
+const createSalonSchema = z.object({
+  name: z.string(),
+});
+
+const updateSalonSchema = createSalonSchema.partial();
 
 export const createSalon = async (
-  req: AuthRequest,
+  req: Request,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    const ownerId = req.user?.id as string;
-
-    const result = validateData(createSalonSchema, req.body);
-    if (result instanceof ZodError) {
-      throw new ValidationError(result.message || "Invalid request data");
+    const ownerId = req.user?.id;
+    if (!ownerId) {
+      throw new ValidationError("User not authenticated");
     }
 
-    const { name } = req.body;
+    const result = createSalonSchema.safeParse(req.body);
+    if (result.error) {
+      throw new ValidationError(result.error.message || "Invalid request data");
+    }
+
+    const { name } = result.data;
     const existingSalon = await prisma.saloon.findFirst({
       where: { name, ownerId: ownerId },
     });
@@ -38,30 +39,33 @@ export const createSalon = async (
       data: { name: name, ownerId: ownerId },
     });
 
-    res
-      .status(200)
-      .json(new ApiResponse(200, salon, "Salon created successfully!"));
+    return res
+      .status(201)
+      .json(new ApiResponse(201, salon, "Salon created successfully!"));
   } catch (error) {
     return next(error);
   }
 };
 
 export const getAllSalons = async (
-  req: AuthRequest,
+  req: Request,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    const ownerId = req.user?.id as string;
+    const ownerId = req.user?.id;
+    if (!ownerId) {
+      throw new ValidationError("User not authenticated");
+    }
     const salons = await prisma.saloon.findMany({
       where: { ownerId: ownerId },
     });
 
-    if (!salons) {
+    if (!salons || salons.length === 0) {
       return next(new NotFoundError("No salons found!"));
     }
 
-    res
+    return res
       .status(200)
       .json(new ApiResponse(200, { salons }, "Salons fetched successfully!"));
   } catch (error) {
@@ -70,12 +74,15 @@ export const getAllSalons = async (
 };
 
 export const getSingleSalon = async (
-  req: AuthRequest,
+  req: Request,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    const ownerId = req.user?.id as string;
+    const ownerId = req.user?.id;
+    if (!ownerId) {
+      throw new ValidationError("User not authenticated");
+    }
     const salonId = req.params.id;
 
     const salon = await prisma.saloon.findFirst({
@@ -85,27 +92,32 @@ export const getSingleSalon = async (
     if (!salon) {
       return next(new NotFoundError("Salon not found!"));
     }
-    res.status(200).json(new ApiResponse(200, salon, "Salon fetched!"));
+    return res
+      .status(200)
+      .json(new ApiResponse(200, salon, "Salon fetched successfully!"));
   } catch (error) {
     return next(error);
   }
 };
 
 export const updateSalon = async (
-  req: AuthRequest,
+  req: Request,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    const ownerId = req.user?.id as string;
+    const ownerId = req.user?.id;
+    if (!ownerId) {
+      throw new ValidationError("User not authenticated");
+    }
     const salonId = req.params.id;
 
-    const result = validateData(updateSalonSchema, req.body);
-    if (result instanceof ZodError) {
-      throw new ValidationError(result.message || "Invalid request data");
+    const result = updateSalonSchema.safeParse(req.body);
+    if (result.error) {
+      throw new ValidationError(result.error.message || "Invalid request data");
     }
 
-    const { name } = result;
+    const { name } = result.data;
 
     const existingSalon = await prisma.saloon.findFirst({
       where: { id: salonId, ownerId: ownerId },
@@ -117,9 +129,9 @@ export const updateSalon = async (
 
     const updatedSalon = await prisma.saloon.update({
       where: { id: salonId, ownerId: ownerId },
-      data: { name: name },
+      data: { name },
     });
-    res
+    return res
       .status(200)
       .json(new ApiResponse(200, updatedSalon, "Salon updated successfully!"));
   } catch (error) {
@@ -128,12 +140,15 @@ export const updateSalon = async (
 };
 
 export const deleteSalon = async (
-  req: AuthRequest,
+  req: Request,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    const ownerId = req.user?.id as string;
+    const ownerId = req.user?.id;
+    if (!ownerId) {
+      throw new ValidationError("User not authenticated");
+    }
     const salonId = req.params.id;
 
     const salon = await prisma.saloon.findFirst({
@@ -148,7 +163,7 @@ export const deleteSalon = async (
       where: { id: salonId, ownerId: ownerId },
     });
 
-    res
+    return res
       .status(200)
       .json(new ApiResponse(200, null, "Salon deleted successfully!"));
   } catch (error) {
