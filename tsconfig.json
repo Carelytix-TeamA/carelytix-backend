@@ -11,7 +11,8 @@
     // This allows other packages/apps to depend on and use types from utils.
 
     { "path": "./apps/api-gateway" },
-    { "path": "./apps/auth-service" }, 
+    { "path": "./apps/auth-service" },
+    { "path": "./apps/user-service" },
     { "path": "./packages/db" }, // Shared configs of db
     { "path": "./packages/middleware" }, // Shared configs of middleware
     { "path": "./packages/utils" } // Shared configs of utils

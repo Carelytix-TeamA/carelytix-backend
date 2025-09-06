@@ -111,7 +111,7 @@ export const updateBranch = async (
     }
     const { name, address, city, pincode, contactNo, salon_id } = result;
 
-    const data = {};
+    const data: { [key: string]: any } = {};
     if (name) data["name"] = name;
     if (address) data["address"] = address;
     if (city) data["city"] = city;
