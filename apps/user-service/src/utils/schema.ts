@@ -80,3 +80,21 @@ export const deleteBranchSchema = z.object({
     .min(1, { message: "Salon ID is required" })
     .max(100, { message: "Salon ID must be at most 100 characters long" }),
 });
+
+export const createStaffSchema = z.object({
+  name: z
+    .string()
+    .min(2, { message: "Staff name must be at least 2 characters long" })
+    .max(50, { message: "Staff name must be at most 50 characters long" }),
+  role: z.enum([
+    "head_of_operation",
+    "stylist",
+    "manicurist",
+    "make_up_artist",
+    "floor_manager",
+    "spa_staff",
+    "cleaning_staff",
+  ]),
+  userId: z.string(),
+  branchId: z.string(),
+});
