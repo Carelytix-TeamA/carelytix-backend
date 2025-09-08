@@ -130,6 +130,7 @@ model Saloon {
 
 model Branch {
   id             String          @id @default(uuid())
+  branchCode     String
   name           String
   address        String?
   city           String?
@@ -151,6 +152,9 @@ model Branch {
 
 model Staff {
   id             String          @id @default(uuid())
+  name           String
+  contactNumber  String
+  address        String?
   role           StaffRole
   userId         String          @unique @map("user_id")
   user           User            @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -159,6 +163,7 @@ model Staff {
   availableSlots AvailableSlot[]
 
   updatedAt DateTime @updatedAt @map("updated_at")
+  createdAt DateTime @default(now()) @map("created_at")
 
   @@map("staff")
 }
