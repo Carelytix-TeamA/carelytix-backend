@@ -48,7 +48,7 @@ export const getAllStaff = async (
 
     return res
       .status(200)
-      .json(new ApiResponse(200, staff, "Staff fetched successfully!"));
+      .json(new ApiResponse(200, staff, "All Staffs fetched successfully!"));
   } catch (error) {
     next(error);
   }
