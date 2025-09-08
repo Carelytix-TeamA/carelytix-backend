@@ -84,8 +84,14 @@ export const deleteBranchSchema = z.object({
 export const createStaffSchema = z.object({
   name: z
     .string()
-    .min(2, { message: "Staff name must be at least 2 characters long" })
-    .max(50, { message: "Staff name must be at most 50 characters long" }),
+    .min(2, { message: "Staff name must be at least 2 characters long" }),
+  contactNumber: z
+    .string()
+    .min(10, { message: "Contact number must be at least 10 characters long" }),
+  address: z
+    .string()
+    .min(2, { message: "Address must be at least 2 characters long" })
+    .optional(),
   role: z.enum([
     "head_of_operation",
     "stylist",
@@ -97,4 +103,30 @@ export const createStaffSchema = z.object({
   ]),
   userId: z.string(),
   branchId: z.string(),
+});
+
+export const updateStaffSchema = z.object({
+  name: z
+    .string()
+    .min(2, { message: "Name must be at least 2 characters long" })
+    .optional(),
+  contactNumber: z
+    .string()
+    .min(10, { message: "Contact number must be at least 10 characters long" })
+    .optional(),
+  address: z
+    .string()
+    .min(2, { message: "Address must be at least 2 characters long" })
+    .optional(),
+  role: z
+    .enum([
+      "head_of_operation",
+      "stylist",
+      "manicurist",
+      "make_up_artist",
+      "floor_manager",
+      "spa_staff",
+      "cleaning_staff",
+    ])
+    .optional(),
 });
