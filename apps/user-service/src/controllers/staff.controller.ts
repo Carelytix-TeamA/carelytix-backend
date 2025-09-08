@@ -72,7 +72,7 @@ export const getStaffById = async (
 
     return res
       .status(200)
-      .json(new ApiResponse(200, staff, "Staff By Id successfully!"));
+      .json(new ApiResponse(200, staff, "Staff fetched successfully!"));
   } catch (error) {
     next(error);
   }
