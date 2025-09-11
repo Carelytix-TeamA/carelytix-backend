@@ -2,7 +2,7 @@ import { prisma } from "@carelytix/db";
 import { NotFoundError, ValidationError } from "@carelytix/utils/error-handler";
 import { ApiResponse } from "@carelytix/utils/responce";
 import { NextFunction, Request, Response } from "express";
-import { createServiceSchema } from "src/utils/schema.js";
+import { createServiceSchema, updateServiceSchema } from "src/utils/schema.js";
 
 export const createService = async (
   req: Request,
@@ -95,6 +95,45 @@ export const updateService = async (
   next: NextFunction
 ) => {
   try {
+    const ownerId = req.user?.id;
+    if (!ownerId) {
+      throw new ValidationError("User not authenticated");
+    }
+
+    const serviceId = req.params.id;
+    if (!serviceId) {
+      return next(new NotFoundError("Service not found!"));
+    }
+
+    const result = updateServiceSchema.safeParse(req.body);
+    if (result.error) {
+      throw new ValidationError(result.error.message || "Invalid request data");
+    }
+
+    const { name, price, description, durationMinutes, branchId } = result.data;
+
+    const data: {
+      name?: string;
+      price?: number;
+      branchId?: string;
+      description?: string;
+      durationMinutes?: number;
+    } = {};
+
+    if (name) data.name = name;
+    if (price) data.price = Number(price);
+    if (branchId) data.branchId = branchId;
+    if (description) data.description = description;
+    if (durationMinutes) data.durationMinutes = Number(durationMinutes);
+
+    const service = await prisma.service.update({
+      where: { id: serviceId },
+      data: data,
+    });
+
+    return res
+      .status(200)
+      .json(new ApiResponse(200, service, "Service updated successfully!"));
   } catch (error) {
     next(error);
   }

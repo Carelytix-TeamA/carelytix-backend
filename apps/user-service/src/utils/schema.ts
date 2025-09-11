@@ -147,3 +147,20 @@ export const createServiceSchema = z.object({
     .optional(),
   branchId: z.string(),
 });
+
+export const updateServiceSchema = z.object({
+  name: z
+    .string()
+    .min(2, { message: "Name must be at least 2 characters long" })
+    .optional(),
+  description: z
+    .string()
+    .min(2, { message: "Description must be at least 2 characters long" })
+    .optional(),
+  price: z.string().min(0, { message: "Price must be at least 0" }).optional(),
+  durationMinutes: z
+    .string()
+    .min(0, { message: "Duration must be at least 0" })
+    .optional(),
+  branchId: z.string().optional(),
+});
