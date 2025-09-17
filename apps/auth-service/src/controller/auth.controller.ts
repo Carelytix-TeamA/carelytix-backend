@@ -86,6 +86,10 @@ export const loginUser = async (
         {
           id: user.id,
           email: user.email,
+          name: user.name,
+          primaryContactNo: user.primaryContactNo,
+          userMeta: user.userMeta,
+          isVerified: user.isVerified,
         },
         "Login successful!"
       )
