@@ -40,9 +40,19 @@ export const createSalon = async (
       data: { name: name, ownerId: ownerId },
     });
 
+    const branch = await prisma.branch.create({
+      data: {
+        name: "main",
+        saloonId: salon.id,
+        branchCode: "main",
+      },
+    });
+
     return res
       .status(201)
-      .json(new ApiResponse(201, salon, "Salon created successfully!"));
+      .json(
+        new ApiResponse(201, salon, "Salon And Main created successfully!")
+      );
   } catch (error) {
     return next(error);
   }
