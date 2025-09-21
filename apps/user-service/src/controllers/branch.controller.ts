@@ -14,12 +14,14 @@ export const createBranch = async (
   next: NextFunction
 ) => {
   try {
+    console.log("result", req.body);
     const result = createBranchSchema.safeParse(req.body);
 
     if (result.error) {
       throw new ValidationError(result.error.message || "Invalid request data");
     }
-    const { name, address, city, pincode, contactNo, saloonId } = result.data;
+    const { name, address, city, pincode, contactNo, saloonId, branchCode } =
+      result.data;
     const existingSalon = await prisma.saloon.findFirst({
       where: { id: saloonId },
     });
@@ -36,12 +38,19 @@ export const createBranch = async (
         pincode,
         contactNo,
         saloonId,
+        branchCode,
       },
     });
 
     return res
       .status(200)
-      .json(new ApiResponse(201, newBranch, "Branch created successfully!"));
+      .json(
+        new ApiResponse(
+          201,
+          { branch: newBranch },
+          "Branch created successfully!"
+        )
+      );
   } catch (error) {
     return next(error);
   }
@@ -52,9 +61,17 @@ export const getAllBranches = async (
   next: NextFunction
 ) => {
   try {
-    const saloonId = req.params.id;
+    const userId = req.user?.id;
+
+    const salon = await prisma.saloon.findFirst({
+      where: { ownerId: userId },
+    });
+
+    if (!salon) {
+      return next(new NotFoundError("Salon not found!"));
+    }
     const branches = await prisma.branch.findMany({
-      where: { saloonId: saloonId },
+      where: { saloonId: salon.id },
     });
 
     if (!branches || branches.length === 0) {
@@ -107,7 +124,7 @@ export const updateBranch = async (
       throw new ValidationError(result.error.message || "Invalid request data");
     }
 
-    const { name, address, city, pincode, contactNo } = result.data;
+    const { name, address, city, pincode, contactNo, branchCode } = result.data;
 
     const existingBranch = await prisma.branch.findFirst({
       where: { id: branchId },
@@ -125,15 +142,21 @@ export const updateBranch = async (
         city,
         pincode,
         contactNo,
+        branchCode,
       },
     });
 
     return res
       .status(200)
       .json(
-        new ApiResponse(200, updatedBranch, "Branch updated successfully!")
+        new ApiResponse(
+          200,
+          { branch: updatedBranch },
+          "Branch updated successfully!"
+        )
       );
   } catch (error) {
+    console.log(error);
     return next(error);
   }
 };
@@ -145,16 +168,13 @@ export const deleteBranch = async (
 ) => {
   try {
     const branchId = req.params.id;
-    const result = deleteBranchSchema.safeParse(req.body);
-
-    if (result.error) {
-      throw new ValidationError(result.error.message || "Invalid request data");
+    console.log("branchId", branchId);
+    if (!branchId) {
+      throw new ValidationError("Invalid request data");
     }
 
-    const { saloonId } = result.data;
-
     const existingBranch = await prisma.branch.findFirst({
-      where: { id: branchId, saloonId: saloonId },
+      where: { id: branchId },
     });
 
     if (!existingBranch) {
@@ -162,7 +182,7 @@ export const deleteBranch = async (
     }
 
     await prisma.branch.delete({
-      where: { id: branchId, saloonId: saloonId },
+      where: { id: branchId },
     });
 
     return res

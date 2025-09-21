@@ -104,18 +104,25 @@ export const refreshToken = async (
   next: NextFunction
 ) => {
   try {
-    const refreshToken =
-      req.cookies["access-token"] || req.headers.authorization?.split(" ")[1];
+    const refreshToken = req.cookies["refresh-token"] || req.body.refreshToken;
+
+    if (!refreshToken) {
+      return res.status(401).json({ message: "Refresh token missing" });
+    }
+
     const { accessToken, refreshToken: newRefreshToken } =
       await refreshAuthToken({
         refreshToken,
         userAgent: req.headers["user-agent"] as string,
         ipAddress: req.ip,
       });
+
     setCookie(res, "access-token", accessToken);
     setCookie(res, "refresh-token", newRefreshToken);
+
     return res.status(200).json(new ApiResponse(200, null, "Token refreshed!"));
   } catch (error) {
+    console.log(error);
     return next(error);
   }
 };

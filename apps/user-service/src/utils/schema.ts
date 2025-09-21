@@ -44,6 +44,10 @@ export const createBranchSchema = z.object({
     .string()
     .min(1, { message: "Salon ID is required" })
     .max(100, { message: "Salon ID must be at most 100 characters long" }),
+  branchCode: z
+    .string()
+    .min(1, { message: "branch code is required" })
+    .max(20, { message: "branch code must be at most 20 characters long" }),
 });
 
 export const updateBranchSchema = z.object({
@@ -72,10 +76,14 @@ export const updateBranchSchema = z.object({
     .string()
     .min(10, { message: "Contact number must be at least 10 characters long" })
     .optional(),
+  branchCode: z
+    .string()
+    .min(1, { message: "branch code is required" })
+    .max(20, { message: "branch code must be at most 20 characters long" }),
 });
 
 export const deleteBranchSchema = z.object({
-  saloonId: z
+  branchId: z
     .string()
     .min(1, { message: "Salon ID is required" })
     .max(100, { message: "Salon ID must be at most 100 characters long" }),
