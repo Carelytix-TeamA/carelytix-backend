@@ -106,7 +106,7 @@ export const updateService = async (
 
     const serviceId = req.params.id;
     if (!serviceId) {
-      return next(new NotFoundError("Service not found!"));
+      return next(new NotFoundError("Service Id Required!"));
     }
 
     const result = updateServiceSchema.safeParse(req.body);
