@@ -73,6 +73,10 @@ export const getSingleService = async (
   try {
     const serviceId = req.params.id;
 
+    if (!serviceId) {
+      return next(new NotFoundError("Service Id Required!"));
+    }
+
     const service = await prisma.service.findFirst({
       where: { id: serviceId },
     });
